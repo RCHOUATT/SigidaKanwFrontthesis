@@ -1,0 +1,41 @@
+  <div class="Liste-titre" >
+    <div class="ListeDesUtilisateurs">Liste des utilisateurs</div>
+    <div class="ligne" style="width:100%; height: 0px; border: 1px #E1E1E1 solid"></div>
+  </div>
+  <div class="Liste">
+    <div class="Liste-entete" >
+      <div class="utilisateur_nom"></div>
+      <div class="utilisateur_id">Id</div>
+      <div class="utilisateur_role">Rôle</div>
+      <div class="utilisateur_pays">Pays</div>
+      <div class="utilisateur_point">Point</div>
+      <div class="utilisateur_piece">Piece</div>
+    </div>
+    @for (user of utilisateurs; track $index){
+      <div class="Liste-contenu " (click)="setActive(user)" [ngClass]='{"liste-selected" : this.activeUserId == user.id && activeUser}'>
+        <div class="utilisateur_profil">
+          @if (user.files == null){
+            <div class="photo">
+              <img src="/assets/Images/avatar.png">
+            </div>
+          }
+          @if (user.files != null){
+            <div class="photo">
+              <img [src]="user.files.url">
+            </div>
+          }
+          <div class="detail">
+            <p>{{ user.nom }}</p>
+            <p>{{user.email}}</p>
+          </div>
+        </div>
+        <div class="utilisateur_id">
+          <p>{{ user.id }}</p>
+        </div>
+        <div class="utilisateur_role"><p>{{ user.role?.role }}</p></div>
+        <div class="utilisateur_pays"><p>{{ user.pays?.pays }}</p></div>
+        <div class="utilisateur_point"><p>{{ user.stats == null ? "- : -" : user.stats.point}}</p></div>
+        <div class="utilisateur_piece"><p>{{ user.stats == null ? "- : -" : user.stats.piece }}</p></div>
+      </div>
+    }
+  </div>

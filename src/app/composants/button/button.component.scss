@@ -1,0 +1,44 @@
+.custom-button {
+  box-sizing: border-box;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  //border: 1px solid var(--couleur-bordure-container-principaux);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: wrap;
+  height: 40px;
+  flex: 1;
+  width: fit-content;
+  padding: var(--padding);
+
+  &.primary {
+    background-color: var(--couleur-main);
+    color: white;
+  }
+
+  &.secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  &.danger {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  &:hover{
+    background-color: var(--couleur-secondaire)
+  }
+  &:active{
+    background-color: #009302;
+  }
+}

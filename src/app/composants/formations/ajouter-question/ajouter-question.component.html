@@ -1,0 +1,83 @@
+<main class="principal">
+  <div class="contenus">
+    <div class="contenus-container">
+      <div class="forms-c01">
+        <p style="color: black; font-weight: bold">Ajouter une question</p>
+        <div class="forms-c031">
+          <div class="divider"></div>
+          <div class="elmt-increment">
+            <!--Le contenuer pour incrémenter l'élement(question, contenu etc..)-->
+            <p class="elmt-nom">Question</p>
+          </div>
+          <div class="divider"></div>
+          @for (quest of questions; track $index){
+            <div class="forms-c04">
+              <p style="color: black; font-weight: bold" class="titre-c1">Question {{ $index + 1 }} </p>
+              <div class="field">
+                <input type="text" name="text" id="{{$index}}" class="text-i01" placeholder="Question" [(ngModel)]="quest.question.question">
+                <!--<div class="menu-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><polyline points="112 184 256 328 400 184" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/></svg>
+                </div>
+                -->
+              </div>
+            </div>
+            <div class="forms-c04">
+              <p style="color: black; font-weight: 600" class="titre-c1">Reponse Correcte</p>
+              <div class="field">
+                <textarea name="description" id="{{$index}}" class="id-01" placeholder="Reponse Correcte" [(ngModel)]="quest.question.reponseCorrecte"></textarea>
+                <!--<div class="menu-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><polyline points="112 184 256 328 400 184" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/></svg>
+                </div>
+                -->
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="elmt-increment elmt-increment">
+              <!--Le contenuer pour incrémenter l'élement(question, contenu etc..)-->
+              <p class="elmt-nom">Reponse possible</p>
+              <div class="elmt-increment-01">
+                <div class="menu-icon ict-01"(click)="incrementNbreReponse($index)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>
+                </div>
+                <p class="elmt-nom">{{ nbreReponsePossible }}</p>
+                <div class="menu-icon ict-01" (click)="decrementNbreReponse($index)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            @for (elment of questions[$index].reponsePossible; track $index){
+              <div class="forms-c04">
+                <p style="color: black; font-weight: 600" class="titre-c1">Reponse possible</p>
+                <div class="field">
+                  <textarea name="description" id="{{$index}}" class="id-01" placeholder="Repons possible" [(ngModel)]="elment.reponsePossible"></textarea>
+                  <!--<div class="menu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><polyline points="112 184 256 328 400 184" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/></svg>
+                  </div>
+                  -->
+                </div>
+              </div>
+              <div class="divider"></div>
+            }
+            <app-files style="width: 100%"></app-files>
+            <div class="divider"></div>
+          }
+        </div>
+        <div class="btn-c01">
+          <app-button
+            label= "Ajouter"
+            color="primary"
+            icon="trash"
+            type="button"
+            [disabled] = false
+            largeur="flex: 1"
+            (click)="Ajouter()"
+          >
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+

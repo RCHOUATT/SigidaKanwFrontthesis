@@ -1,0 +1,669 @@
+@if (addContenu)
+{
+  <div class="formulaire">
+    <div class="shadows1" (click)="setAddContenu()"></div>
+    <!--<div class="fermer_container" (click)="setAddContenu()">
+      <div class="fermer" (click)="setAddContenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm75.31,260.69a16,16,0,1,1-22.62,22.62L256,278.63l-52.69,52.68a16,16,0,0,1-22.62-22.62L233.37,256l-52.68-52.69a16,16,0,0,1,22.62-22.62L256,233.37l52.69-52.68a16,16,0,0,1,22.62,22.62L278.63,256Z"/></svg>
+      </div>
+    </div>-->
+    <app-ajouter-contenu class="forms-add" [chapitre]="this.activeChapitre"></app-ajouter-contenu>
+  </div>
+}
+@if (addChapitre)
+{
+  <div class="formulaire">
+    <div class="shadows1" (click)="setAddChapitre()"></div>
+    <!--<div class="fermer_container" (click)="setAddContenu()">
+      <div class="fermer" (click)="setAddContenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm75.31,260.69a16,16,0,1,1-22.62,22.62L256,278.63l-52.69,52.68a16,16,0,0,1-22.62-22.62L233.37,256l-52.68-52.69a16,16,0,0,1,22.62-22.62L256,233.37l52.69-52.68a16,16,0,0,1,22.62,22.62L278.63,256Z"/></svg>
+      </div>
+    </div>-->
+    <app-ajouter-chapitre class="forms-add" [ChapitreCoursId]="this.activeCoursId"></app-ajouter-chapitre>
+  </div>
+}
+@if (addQuestion)
+{
+  <div class="formulaire">
+    <div class="shadows1" (click)="setAddQuestion()"></div>
+    <!--<div class="fermer_container" (click)="setAddContenu()">
+      <div class="fermer" (click)="setAddContenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48Zm75.31,260.69a16,16,0,1,1-22.62,22.62L256,278.63l-52.69,52.68a16,16,0,0,1-22.62-22.62L233.37,256l-52.68-52.69a16,16,0,0,1,22.62-22.62L256,233.37l52.69-52.68a16,16,0,0,1,22.62,22.62L278.63,256Z"/></svg>
+      </div>
+    </div>-->
+    <app-ajouter-question class="forms-add" [testId]="this.TestIdAchercher"></app-ajouter-question>
+  </div>
+}
+<div class="container" >
+  <nav class="sideBar">
+    <div class="logo-and-menus">
+      <div class="logo">
+        <img src="assets/Images/logo.png" alt="logo-sigida-Kanw" />
+        <p>Sigida Kanw</p>
+      </div>
+      <div class="menus-containers">
+        <div class="home menu ">
+          <div class="beforeDrop" (click)="hideDropdown1()" [routerLink] = '["/home"]'>
+            <div class="icon-titre">
+              <div class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M261.56,101.28a8,8,0,0,0-11.06,0L66.4,277.15a8,8,0,0,0-2.47,5.79L63.9,448a32,32,0,0,0,32,32H192a16,16,0,0,0,16-16V328a8,8,0,0,1,8-8h80a8,8,0,0,1,8,8l0,136a16,16,0,0,0,16,16h96.06a32,32,0,0,0,32-32l0-165.06a8,8,0,0,0-2.47-5.79Z"/><path d="M490.91,244.15l-74.8-71.56,0-108.59a16,16,0,0,0-16-16h-48a16,16,0,0,0-16,16l0,32L278.19,40.62C272.77,35.14,264.71,32,256,32h0c-8.68,0-16.72,3.14-22.14,8.63L21.16,244.13c-6.22,6-7,15.87-1.34,22.37A16,16,0,0,0,43,267.56L250.5,69.28a8,8,0,0,1,11.06,0L469.08,267.56a16,16,0,0,0,22.59-.44C497.81,260.76,497.3,250.26,490.91,244.15Z"/></svg>
+                <!--<ion-icon name="home" size="large"></ion-icon>-->
+              </div>
+              <div class="menu-titre">
+                <p>Accueil</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="utilisateur menu">
+          <div class="beforeDrop"  (click)="hideDropdown1()" [routerLink]="['/utilisateur']">
+            <div class="icon-titre">
+              <div class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M332.64,64.58C313.18,43.57,286,32,256,32c-30.16,0-57.43,11.5-76.8,32.38-19.58,21.11-29.12,49.8-26.88,80.78C156.76,206.28,203.27,256,256,256s99.16-49.71,103.67-110.82C361.94,114.48,352.34,85.85,332.64,64.58Z"/><path d="M432,480H80A31,31,0,0,1,55.8,468.87c-6.5-7.77-9.12-18.38-7.18-29.11C57.06,392.94,83.4,353.61,124.8,326c36.78-24.51,83.37-38,131.2-38s94.42,13.5,131.2,38c41.4,27.6,67.74,66.93,76.18,113.75,1.94,10.73-.68,21.34-7.18,29.11A31,31,0,0,1,432,480Z"/></svg>
+                <!--<ion-icon name="person" size="large"></ion-icon>-->
+              </div>
+              <div class="menu-titre">
+                <p>Utilisateur</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="formation menu">
+          <div class="beforeDrop"  (click)="toggleDropdown1()">
+            <div class="icon-titre" [routerLink]="['/formation/langue']">
+              <div class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M204,240H68a36,36,0,0,1-36-36V68A36,36,0,0,1,68,32H204a36,36,0,0,1,36,36V204A36,36,0,0,1,204,240Z"/><path d="M444,240H308a36,36,0,0,1-36-36V68a36,36,0,0,1,36-36H444a36,36,0,0,1,36,36V204A36,36,0,0,1,444,240Z"/><path d="M204,480H68a36,36,0,0,1-36-36V308a36,36,0,0,1,36-36H204a36,36,0,0,1,36,36V444A36,36,0,0,1,204,480Z"/><path d="M444,480H308a36,36,0,0,1-36-36V308a36,36,0,0,1,36-36H444a36,36,0,0,1,36,36V444A36,36,0,0,1,444,480Z"/></svg>
+                <!--<ion-icon name="grid" size="large"></ion-icon>-->
+              </div>
+              <div class="menu-titre">
+                <p>Formation</p>
+              </div>
+            </div>
+            <div class="menu-icon">
+              @if (isDropdownOpen){
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><polyline points="112 328 256 184 400 328" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/></svg>
+                <!--<ion-icon name="chevron-up" size="large" class="chevron"></ion-icon>-->
+              }
+              @if (!isDropdownOpen){
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><polyline points="112 184 256 328 400 184" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px"/></svg>
+                <!--<ion-icon name="chevron-down" size="large" class="chevron"></ion-icon>-->
+              }
+            </div>
+          </div>
+          <!-- Sous-options du menu déroulant -->
+          @if (isDropdownOpen){
+            <div class="dropdown-options">
+              <div class="langue menu">
+                <div class="beforeDrop">
+                  <div class="icon-titre"  [routerLink]="['/formation/langue']">
+                    <div class="menu-icon">
+                      <!--<ion-icon name="book" size="large"></ion-icon>-->
+                      <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M202.24,74C166.11,56.75,115.61,48.3,48,48h0a31.36,31.36,0,0,0-17.92,5.33A32,32,0,0,0,16,79.9V366c0,19.34,13.76,33.93,32,33.93,71.07,0,142.36,6.64,185.06,47a4.11,4.11,0,0,0,6.94-3V106.82a15.89,15.89,0,0,0-5.46-12A143,143,0,0,0,202.24,74Z"/><path d="M481.92,53.3A31.33,31.33,0,0,0,464,48h0c-67.61.3-118.11,8.71-154.24,26a143.31,143.31,0,0,0-32.31,20.78,15.93,15.93,0,0,0-5.45,12V443.91a3.93,3.93,0,0,0,6.68,2.81c25.67-25.5,70.72-46.82,185.36-46.81a32,32,0,0,0,32-32v-288A32,32,0,0,0,481.92,53.3Z"/></svg>
+                    </div>
+                    <div class="menu-titre">
+                      <p>Langue</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="culture menu">
+                <div class="beforeDrop"  [routerLink]="['/formation/culture']">
+                  <div class="icon-titre">
+                    <div class="menu-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M80,480a16,16,0,0,1-16-16V68.13A24,24,0,0,1,75.9,47.41C88,40.38,112.38,32,160,32c37.21,0,78.83,14.71,115.55,27.68C305.12,70.13,333.05,80,352,80a183.84,183.84,0,0,0,71-14.5,18,18,0,0,1,25,16.58V301.44a20,20,0,0,1-12,18.31c-8.71,3.81-40.51,16.25-84,16.25-24.14,0-54.38-7.14-86.39-14.71C229.63,312.79,192.43,304,160,304c-36.87,0-55.74,5.58-64,9.11V464A16,16,0,0,1,80,480Z"/></svg>
+                      <!--<ion-icon name="flag" size="large"></ion-icon>-->
+                    </div>
+                    <div class="menu-titre">
+                      <p>Culture</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="deconnexion menu" (click)="loginService.logout()">
+      <div class="beforeDrop">
+        <div class="icon-titre">
+          <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M256,464C141.31,464,48,370.53,48,255.65c0-62.45,27.25-121,74.76-160.55a22,22,0,1,1,28.17,33.8C113.48,160.1,92,206.3,92,255.65,92,346.27,165.57,420,256,420s164-73.73,164-164.35A164,164,0,0,0,360.17,129a22,22,0,1,1,28-33.92A207.88,207.88,0,0,1,464,255.65C464,370.53,370.69,464,256,464Z"/><path d="M256,272a22,22,0,0,1-22-22V70a22,22,0,0,1,44,0V250A22,22,0,0,1,256,272Z"/></svg>
+          </div>
+          <div class="deconnexion menu-titre">
+            <p>Déconnexion</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="principal">
+    <div class="en-tete">
+      <div class="page-titre">
+        <p>Langue</p>
+      </div>
+      <div class="recherche">
+        <div class="recherche-barre">
+          <input type="text" name="recherche-barre" id="searchBar" class="searchBar" placeholder="Rechercher ...">
+        </div>
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z"/></svg>
+          <!--<img src="assets/Images/search.png" alt="searchIcon">-->
+        </div>
+      </div>
+      <app-button
+        label= "Ajouter cours"
+        color="primary"
+        icon="trash"
+        type="button"
+        [disabled] = false
+        [routerLink]="['/ajouterCours']"
+      >
+      </app-button>
+      <div class="profil-container">
+        <div class="profil">
+          <div class="photo">
+            <img src="https:/randomuser.me/api/portraits/men/60.jpg" alt="Profil utilisateur">
+          </div>
+          <p class="nom-user">Ahmed</p>
+          <div class="arrow-down-filled-triangle">
+            <img src="/assets/Images/arrow-down-filled-triangle.png" alt="icon-eteindre">
+          </div>
+        </div>
+        <div class="profil-dropdown-options">
+          <div class="profile menu">
+            <div class="beforeDrop" [routerLink]="['/utilisateur']">
+              <div class="icon-titre">
+                <div class="menu-icon">
+                  <ion-icon name="person" size="large"></ion-icon>
+                </div>
+                <div class="menu-titre">
+                  <p>Profil</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="deconnexion menu" (click)="loginService.logout()">
+            <div class="beforeDrop">
+              <div class="icon-titre">
+                <div class="menu-icon">
+                  <ion-icon name="power" size="large"></ion-icon>
+                </div>
+                <div class="menu-titre">
+                  <p>Deconnexion</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contenus">
+      <div class="contenus-container">
+        <div class="container-left">
+          <p>Langues</p>
+          <div class="optionsNiveau">
+            @for (language of langue; track $index){
+              <app-button
+                label= "{{language.nom.charAt(0).toUpperCase()}}{{language.nom.slice(1).toLowerCase()}}"
+                color="primary"
+                type="button"
+                [disabled] = false
+                largeur="flex: 1"
+                (click)="setActiveLangue(language.nom)"
+                (click)="setActiveLangueName(language.nom.charAt(0).toUpperCase() + language.nom.slice(1).toLowerCase())"
+                (click)="setActiveNiveau(niveau[0].niveau.charAt(0).toUpperCase() + niveau[0].niveau.slice(1).toLowerCase())"
+                (click)="findCoursBylangue('LINGUISTIQUE', language.nom)"
+                (click)="setActive('Cours ' + this.coursPerlanguage[0].id, this.coursPerlanguage[0].id)"
+                (click)="setActiveCoursNom('Cours ' + 1)"
+                (click)="setActiveLessonNom('chapitre ' + 1)"
+                (click)="findChapitreByCours(this.coursPerlanguage[0].id)"
+                (click)="findContenuByChapitre(this.chapitrePerCours[0].id)"
+                (click)="findTestByChapitre(this.activeChapitre.id)"
+                (click)="setActiveLesson('Lesson ' + 1, chapitrePerCours[0])"
+              >
+              </app-button>
+            }
+          </div>
+          <p>Cours & chapitres</p>
+          @if (activeNiveau == "Debutant"){
+            <div class="conteneurCours">
+              @for (cour of coursPerlanguage; track $index)
+              {
+                <div class="cours menu">
+                  <div class="beforeDrop">
+                    <div class="icon-titre"
+                         (click)="setActive('Cours ' + cour.id, cour.id)"
+                         (click)="setActiveCoursNom('Cours ' + ($index + 1))"
+                         (click)="setActiveLessonNom('chapitre ' + 1)"
+                         (click)="findChapitreByCours(cour.id)"
+                         (click)="setActiveLesson('Lesson ' + 1, chapitrePerCours[0])"
+                         (click)="findContenuByChapitre(this.activeChapitre.id)"
+                         (click)="findTestByChapitre(this.activeChapitre.id)"
+                         (click)="activeTest = false"
+                         [ngClass]="{'active': activeCours === 'Cours ' + cour.id}"
+                    >
+
+                      <div class="menu-titre" (click)="openDropdown()">
+                        <p>Cours {{ $index + 1}}</p>
+                      </div>
+                      <div class="menu-icon">
+                        @if (isDropdownOpen == true && activeCours === 'Cours ' + cour.id){
+                          <ion-icon name="chevron-up" size="large" class="chevron" (click)="hideDropdown()"></ion-icon>
+                        }
+                        @if (isDropdownOpen == false || activeCours !== 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                          <ion-icon name="chevron-down" size="large" class="chevron" (click)="openDropdown()"></ion-icon>
+                        }
+                      </div>
+                    </div>
+                    <div class="menu-icon">
+                      <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)" (click)="ChapitreOption = false" (click)="setCoursoptions()" (click)="setActive('Cours ' + cour.id, cour.id)" ></ion-icon>
+                    </div>
+                  </div>
+                  @if(CoursOption && activeCours === 'Cours ' + cour.id){
+                    <div class="cours-options">
+                      <!--<app-button
+                        label= "Modifier"
+                        color="primary"
+                        icon="trash"
+                        type="button"
+                        [disabled] = false
+                        largeur="flex: 1"
+                      >
+                      </app-button>-->
+                      <app-button
+                        label= "Supprimé"
+                        color="primary"
+                        icon="trash"
+                        type="button"
+                        [disabled] = false
+                        largeur="flex: 1"
+                        (click)="deleteItem('cours', cour.id)"
+                      >
+                      </app-button>
+                      <app-button
+                        label= "Ajouter chapitre"
+                        color="primary"
+                        icon="trash"
+                        type="button"
+                        [disabled] = false
+                        largeur="flex: 1"
+                        (click)="setoptions()"
+                        (click)="setAddChapitre()"
+                      >
+                      </app-button>
+                    </div>
+                  }
+                  <!-- Sous-options du menu déroulant -->
+                  @if (isDropdownOpen && activeCours === 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                    <div class="lesson-menu">
+                      @for (chapitre of chapitrePerCours; track $index){
+                        <div class="beforeDrop">
+                          @if(ChapitreOption && activeLesson === 'Lesson ' + chapitre.id){
+                            <div class="cours-options">
+                              <!--<app-button
+                                label= "Modifier"
+                                color="primary"
+                                icon="trash"
+                                type="button"
+                                [disabled] = false
+                                largeur="flex: 1"
+                              >
+                              </app-button>-->
+                              <app-button
+                                label= "Supprimé"
+                                color="primary"
+                                icon="trash"
+                                type="button"
+                                [disabled] = false
+                                largeur="flex: 1"
+                                (click)="deleteItem('chapitre', chapitre.id)"
+                              >
+                              </app-button>
+                              <app-button
+                                label= "Ajouter Contenu"
+                                color="primary"
+                                icon="trash"
+                                type="button"
+                                [disabled] = false
+                                largeur="flex: 1"
+                                (click)="setAddContenu()"
+                                (click)="ChapitreOption = false"
+                              >
+                              </app-button>
+                            </div>
+                          }
+                          <div class="icon-titre"
+                               (click)="setActiveLesson('Lesson ' + chapitre.id, chapitre)"
+                               (click)="setActiveLessonNom('chapitre ' + ($index + 1))"
+                               (click)="findContenuByChapitre(this.activeChapitre.id)"
+                               (click)="findTestByChapitre(this.activeChapitre.id)"
+                               [ngClass]="{'active': activeLesson === 'Lesson ' + chapitre.id && activeCours === 'Cours ' + cour.id}">
+                            <div class="menu-titre" (click)="openDropdown()">
+                              <p>chapitre {{ $index + 1 }}</p>
+                            </div>
+                          </div>
+                          <div class="menu-icon">
+                            <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)" (click)="setChapteroptions()" (click)="CoursOption = false" (click)="setActiveLesson('Lesson ' + chapitre.id, chapitre)"></ion-icon>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+          @if (activeNiveau == "Intermediaire"){
+            <div class="conteneurCours">
+              @for (cour of coursPerlanguage; track $index)
+              {
+                <div class="cours menu">
+                  <div class="beforeDrop">
+                    <div class="icon-titre"
+                         (click)="setActive('Cours ' + cour.id, cour.id)"
+                         (click)="setActiveCoursNom('Cours ' + ($index + 1))"
+                         (click)="setActiveLessonNom('chapitre ' + 1)"
+                         (click)="findChapitreByCours(cour.id)"
+                         (click)="setActiveLesson('Lesson ' + 1, chapitrePerCours[0])"
+                         (click)="findContenuByChapitre(this.activeChapitre.id)"
+                         (click)="findTestByChapitre(this.activeChapitre.id)"
+                         (click)="activeTest = false"
+                         [ngClass]="{'active': activeCours === 'Cours ' + cour.id}"
+                    >
+                      <div class="menu-titre" (click)="openDropdown()">
+                        <p>Cours {{ $index + 1}}</p>
+                      </div>
+                      <div class="menu-icon">
+                        @if (isDropdownOpen == true && activeCours === 'Cours ' + cour.id){
+                          <ion-icon name="chevron-up" size="large" class="chevron" (click)="hideDropdown()"></ion-icon>
+                        }
+                        @if (isDropdownOpen == false || activeCours !== 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                          <ion-icon name="chevron-down" size="large" class="chevron" (click)="openDropdown()"></ion-icon>
+                        }
+                      </div>
+                    </div>
+                    <div class="menu-icon">
+                      <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)"></ion-icon>
+                    </div>
+                  </div>
+                  <!-- Sous-options du menu déroulant -->
+                  @if (isDropdownOpen && activeCours === 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                    <div class="lesson-menu">
+                      @for (chapitre of chapitrePerCours; track $index){
+                        <div class="beforeDrop">
+                          <div class="icon-titre"
+                               (click)="setActiveLesson('Lesson ' + chapitre.id, chapitre)"
+                               (click)="setActiveLessonNom('chapitre ' + ($index + 1))"
+                               (click)="findContenuByChapitre(this.activeChapitre.id)"
+                               (click)="findTestByChapitre(this.activeChapitre.id)"
+                               [ngClass]="{'active': activeLesson === 'Lesson ' + chapitre.id && activeCours === 'Cours ' + cour.id}">
+                            <div class="menu-titre" (click)="openDropdown()">
+                              <p>chapitre {{ $index + 1 }}</p>
+                            </div>
+                          </div>
+                          <div class="menu-icon">
+                            <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)"></ion-icon>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+          @if (activeNiveau == "Avance"){
+            <div class="conteneurCours">
+              @for (cour of coursPerlanguage; track $index)
+              {
+                <div class="cours menu">
+                  <div class="beforeDrop">
+                    <div class="icon-titre"
+                         (click)="setActive('Cours ' + cour.id, cour.id)"
+                         (click)="setActiveCoursNom('Cours ' + ($index + 1))"
+                         (click)="setActiveLessonNom('chapitre ' + 1)"
+                         (click)="findChapitreByCours(cour.id)"
+                         (click)="setActiveLesson('Lesson ' + 1, chapitrePerCours[0])"
+                         (click)="findContenuByChapitre(this.activeChapitre.id)"
+                         (click)="findTestByChapitre(this.activeChapitre.id)"
+                         (click)="activeTest = false"
+                         [ngClass]="{'active': activeCours === 'Cours ' + cour.id}"
+                    >
+                      <div class="menu-titre" (click)="openDropdown()">
+                        <p>Cours {{ $index + 1}}</p>
+                      </div>
+                      <div class="menu-icon">
+                        @if (isDropdownOpen == true && activeCours === 'Cours ' + cour.id){
+                          <ion-icon name="chevron-up" size="large" class="chevron" (click)="hideDropdown()"></ion-icon>
+                        }
+                        @if (isDropdownOpen == false || activeCours !== 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                          <ion-icon name="chevron-down" size="large" class="chevron" (click)="openDropdown()"></ion-icon>
+                        }
+                      </div>
+                    </div>
+                    <div class="menu-icon">
+                      <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)" (click)="setoptions()"></ion-icon>
+                    </div>
+                  </div>
+                  <!-- Sous-options du menu déroulant -->
+                  @if (isDropdownOpen && activeCours === 'Cours ' + cour.id && chapitrePerCours.length > 0){
+                    <div class="lesson-menu">
+                      @for (chapitre of chapitrePerCours; track $index){
+                        <div class="beforeDrop">
+                          <div class="icon-titre"
+                               (click)="setActiveLesson('Lesson ' + chapitre.id, chapitre)"
+                               (click)="setActiveLessonNom('chapitre ' + ($index + 1))"
+                               (click)="findContenuByChapitre(this.activeChapitre.id)"
+                               (click)="findTestByChapitre(this.activeChapitre.id)"
+                               [ngClass]="{'active': activeLesson === 'Lesson ' + chapitre.id && activeCours === 'Cours ' + cour.id}">
+                            <div class="menu-titre" (click)="openDropdown()">
+                              <p>chapitre {{ $index + 1 }}</p>
+                            </div>
+                          </div>
+                          <!--<div class="menu-icon" (click)="afficherLessonOption()">
+                            <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(&#45;&#45;couleur-main)"></ion-icon>
+                          </div>-->
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+        @if (!activeTest){
+          <div class="container-right">
+            <div class="container-right-en-tete">
+              <div class="breadcrumb">
+                <!--Fil d'ariane-->
+                <div class="breadcrumb-titre" >
+                  <div class="breadcrumb-menu-titre" (click)="openDropdown()">
+                    <p >{{ activeLangueNom }}</p>
+                  </div>
+                  <div class="breadcrumb-menu-icon">
+                    <ion-icon name="chevron-forward" size="large" class="arrow-forward"></ion-icon>
+                  </div>
+                </div>
+                <div class="breadcrumb-titre" >
+                  <div class="breadcrumb-menu-titre" (click)="openDropdown()">
+                    <p >{{ activeNiveau }}</p>
+                  </div>
+                  <div class="breadcrumb-menu-icon">
+                    <ion-icon name="chevron-forward" size="large" class="arrow-forward"></ion-icon>
+                  </div>
+                </div>
+                <div class="breadcrumb-titre" >
+                  <div class="breadcrumb-menu-titre" (click)="openDropdown()">
+                    <p >{{activeCoursNom}}</p>
+                  </div>
+                  <div class="breadcrumb-menu-icon">
+                    <ion-icon name="chevron-forward" size="large" class="arrow-forward"></ion-icon>
+                  </div>
+                </div>
+                <div class="breadcrumb-titre" >
+                  <div class="breadcrumb-menu-titre" (click)="openDropdown()">
+                    <p >{{activeLessonNom}}</p>
+                  </div>
+                </div>
+              </div>
+              @if(ContentOption){
+                <div class="cours-options">
+                  <!--<app-button
+                    label= "Modifier"
+                    color="primary"
+                    icon="trash"
+                    type="button"
+                    [disabled] = false
+                    largeur="flex: 1"
+                  >
+                  </app-button>-->
+                  <app-button
+                    label= "Test Associé"
+                    color="primary"
+                    icon="trash"
+                    type="button"
+                    [disabled] = false
+                    largeur="flex: 1"
+                    (click)="setActiveTest()"
+                  >
+                  </app-button>
+                  <app-button
+                    label= "Ajouter Contenu"
+                    color="primary"
+                    icon="trash"
+                    type="button"
+                    [disabled] = false
+                    largeur="flex: 1"
+                    (click) = setAddContenu();
+                    (click)="setoptions()"
+                  >
+                  </app-button>
+                  <app-button
+                    label= "Ajouter chapitre"
+                    color="primary"
+                    icon="trash"
+                    type="button"
+                    [disabled] = false
+                    largeur="flex: 1"
+                    (click)="setoptions()"
+                    (click)="setAddChapitre()"
+                  >
+                  </app-button>
+                </div>
+              }
+              <div class="menu-icon">
+                <ion-icon name="ellipsis-vertical" size="large" class="menu-drop" style="color: var(--couleur-main)" (click)="setoptions()"></ion-icon>
+              </div>
+            </div>
+            <div class="cours-datils" >
+              <div class="titre-element">
+                <p><strong style="color: black">Titre : </strong>activeChapitre.titre?{{activeChapitre.titre}}:""</p>
+                <div class="menu-icon">
+                  <ion-icon name="refresh" size="large" class="menu-drop"></ion-icon>
+                </div>
+              </div>
+              <div class="ligne" style="width:100%; height: 0px; border: 1px #E1E1E1 solid"></div>
+              <div class="resume-element">
+                <p><strong style="color: black">Resumé : </strong>{{activeChapitre.resume}}</p>
+              </div>
+            </div>
+            @if(contenuPerChapitre){
+              @for (contenu of contenuPerChapitre; track $index)
+              {
+                <div class="contenu-datils" >
+                  <div class="titre-contenu">
+                    <p><strong style="color: black">Sous-titre : </strong>{{contenu.titre}}</p>
+                    <div class="menu-icon" (click)="playAudio(contenu?.files[1].url)">
+                      <ion-icon name="volume-high" size="large" class="menu-drop"></ion-icon>
+                    </div>
+                    <div class="menu-icon">
+                      <ion-icon name="refresh" size="large" class="menu-drop"></ion-icon>
+                    </div>
+                  </div>
+                  <div class="ligne" style="width:100%; height: 0px; border: 1px #E1E1E1 solid"></div>
+                  <div class="contenu">
+                    <div class="fichier">
+                      <img [src]=" contenu?.files[0].url" />
+                    </div>
+                    <p><strong style="color: black">Contenu : </strong>{{contenu.description}}</p>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        }
+        @if (activeTest){
+          <div class="container-right">
+            <div class="container-right-en-tete">
+              <div class="menu-icon" (click)="setActiveTest()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path d="M448,440a16,16,0,0,1-12.61-6.15c-22.86-29.27-44.07-51.86-73.32-67C335,352.88,301,345.59,256,344.23V424A16,16,0,0,1,229,435.57l-176-168a16,16,0,0,1,0-23.14l176-168A16,16,0,0,1,256,88v80.36c74.14,3.41,129.38,30.91,164.35,81.87C449.32,292.44,464,350.9,464,424a16,16,0,0,1-16,16Z"/></svg>
+              </div>
+              <app-button
+                label= "Modifier"
+                color="primary"
+                icon="trash"
+                type="button"
+                [disabled] = false
+                largeur="flex: 1"
+              >
+              </app-button>
+              <app-button
+                label= "Ajouter Question"
+                color="primary"
+                icon="trash"
+                type="button"
+                [disabled] = false
+                (click)="setAddQuestion()"
+              >
+              </app-button>
+            </div>
+            <div class="cours-datils" >
+              <div class="titre-element">
+                <p><strong style="color: black">Titre : </strong>{{testPerChapitre[0].titre}}</p>
+                <div class="menu-icon">
+                  <ion-icon name="refresh" size="large" class="menu-drop"></ion-icon>
+                </div>
+              </div>
+              <div class="ligne" style="width:100%; height: 0px; border: 1px #E1E1E1 solid"></div>
+              <div class="resume-element">
+                <p><strong style="color: black">Resumé : </strong>{{testPerChapitre[0].description}}</p>
+                <p><strong style="color: black">Le nombre de point pour ce test : </strong>{{testPerChapitre[0].nbrePoint == null ? "- : -" : testPerChapitre[0].nbrePoint}}</p>
+              </div>
+            </div>
+            @for (quest of questionPerTest; track $index)
+            {
+              <div class="contenu-datils" >
+                <div class="titre-contenu">
+                  <p><strong style="color: black">Question 1 : </strong>{{quest.question}} </p>
+                  <div class="menu-icon" (click)="playAudio(quest?.files[1].url)">
+                    <ion-icon name="volume-high" size="large" class="menu-drop"></ion-icon>
+                  </div>
+                  <div class="menu-icon">
+                    <ion-icon name="refresh" size="large" class="menu-drop"></ion-icon>
+                  </div>
+                </div>
+                <div class="ligne" style="width:100%; height: 0px; border: 1px #E1E1E1 solid"></div>
+                <div class="contenu">
+                  <div class="fichier">
+                    <img [src]=" quest?.files[0].url" />
+                  </div>
+                  <div class="reponse">
+                    <p><strong style="color: black">Reponse Correcte : </strong>{{quest.reponseCorrecte}}</p>
+                    @for(possibleReponse of reponsePossible; track $index){
+                      @if(possibleReponse.question.id == quest.id){
+                        <p><strong style="color: black">Reponse possible : </strong>{{ possibleReponse.reponsePossible }}</p>
+                      }
+                    }
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</div>
+
