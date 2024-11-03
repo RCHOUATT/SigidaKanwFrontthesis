@@ -107,8 +107,7 @@ class _SignupLandinPageState extends State<SignupLandinPage> {
                     ),
                   ],
                 ),
-              )
-
+              ),
             ],
           ),
         ),

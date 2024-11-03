@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:sigidakanwmobile/ChoixDesLangues.dart';
 import 'package:sigidakanwmobile/CoursParNiveau.dart';
-import 'package:sigidakanwmobile/Modal/Utilisateur.dart';
-
-import 'Modal/Langues.dart';
+import 'package:sigidakanwmobile/service/AuthService.dart';
+import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
 import 'Modal/UserProvider.dart';
 
 class Home extends StatefulWidget {
@@ -25,27 +22,41 @@ class HomeState extends State<Home> {
   late String searchValue;
   dynamic? utilisateur;
   dynamic _selectedLangue;
+  final AuthService _authService = AuthService();
+  final CrudServiceWithoutImage Service1 = CrudServiceWithoutImage();
 
-  // Initialise la langue sélectionnée avec la première langue
-  void _initSelectedLanguage() {
-    if (utilisateur != null && utilisateur["langues"].isNotEmpty) {
-      _selectedLangue = utilisateur["langues"][0];
-      print("Langue initialisée : $_selectedLangue");
+  @override
+  void initState() {
+    super.initState();
+    updateUser();
+  }
+
+  Future<void> updateUser() async {
+    String? token = await _authService.getToken();
+    if (token != null) {
+      final userId = await _authService.getUserIdFromToken(token);
+      final user = await Service1.findUser(userId);
+      setState(() {
+        utilisateur = user;
+        if (utilisateur != null && utilisateur["langues"].isNotEmpty) {
+          _selectedLangue = utilisateur["langues"][0];
+        }
+      });
+      print("Utilisateur : $utilisateur");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    utilisateur = userProvider.utilisateur;
-
-    // Initialiser la langue sélectionnée après que `utilisateur` est défini
-    if (utilisateur != null && _selectedLangue == null) {
-      _initSelectedLanguage();
-    }
     return Scaffold(
       body:  utilisateur == null
-        ? const Center(child: CircularProgressIndicator())
+        ? const Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.white,
+            strokeWidth: 4,
+            color: Color(0xFF45A100),
+          ),
+        )
         : Container(
         color: const Color(0xFFE3EDFD),
         padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
@@ -432,7 +443,7 @@ class HomeState extends State<Home> {
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: Image.network(
-                                            "http://localhost:8081/sigidaKanw/drive/getFile/${c["chapitreList"][0]["contenuList"][0]["files"][0]["idFile"]}",
+                                            c["chapitreList"][0]["contenuList"][0]["files"][0]["url"],
                                             loadingBuilder: (context, child, loadingProgress) {
                                               const SizedBox(
                                                 width: double.infinity,

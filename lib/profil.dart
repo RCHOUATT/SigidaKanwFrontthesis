@@ -464,7 +464,7 @@ class Profil extends StatelessWidget {
                               ),
                               child: Container(
                                   width: double.infinity,
-                                  height: double.infinity,
+                                  //height: double.infinity,
                                   child: LayoutBuilder(
                                     builder: (context, constraints){
                                       double width = constraints.maxWidth;
