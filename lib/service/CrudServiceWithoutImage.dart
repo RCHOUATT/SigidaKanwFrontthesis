@@ -8,7 +8,32 @@ import 'AuthService.dart';
 
 class CrudServiceWithoutImage {
   final String apiUrl = 'http://localhost:8081/sigidaKanw'; // URL de ton API backend
+  final String apiUrl1 = 'http://localhost:8080/sigidaKanw'; // URL de ton API backend
   final AuthService _authService = AuthService();
+
+  Future<dynamic> getStat(String endpoint, int id) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$apiUrl/$endpoint/Afficher/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Décodage de la réponse JSON et création d'une instance `Utilisateur`
+        print( jsonDecode(response.body));
+        return jsonDecode(response.body); response.body;
+      } else {
+        print('Erreur: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Erreur lors du chargement: $e');
+      return null;
+    }
+
+  }
 
   Future<dynamic?> findUser(int? id) async {
     try {
@@ -39,6 +64,44 @@ class CrudServiceWithoutImage {
       yield jsonDecode(response.body);
     } else {
       throw Exception('Element non trouvé');
+    }
+  }
+
+  Stream<List<dynamic>> getNiveau(String endpoint,) async* {
+    final response = await http.get(Uri.parse('$apiUrl1/$endpoint/Afficher'));
+    if (response.statusCode == 200) {
+      yield jsonDecode(response.body);
+    } else {
+      throw Exception('Element non trouvé');
+    }
+  }
+
+  Future<dynamic?> modifierStatistiques(int id, int point, int piece) async {
+    final String apiUrl = 'http://localhost:8081/sigidaKanw/stat/Modifier/$id';
+
+    // Création du corps de la requête
+    final Map<String, dynamic> body = {
+      "point": point,
+      "piece": piece,
+    };
+
+    try {
+      final response = await http.put(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(body), // Sérialisation de l'objet en JSON
+      );
+
+      if (response.statusCode == 200) {
+        return response.statusCode;
+        print('Statistiques mises à jour avec succès.');
+      } else {
+        print('Échec de la mise à jour : ${response.statusCode} - ${response.body}');
+      }
+    } catch (e) {
+      print('Erreur lors de la mise à jour : $e');
     }
   }
   /*Future<List<dynamic>> getdata(String endpoint,) async {

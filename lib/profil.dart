@@ -1,25 +1,71 @@
 import 'dart:ui';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:sigidakanwmobile/Login.dart';
+import 'package:sigidakanwmobile/Modal/Utilisateur.dart';
 import 'package:sigidakanwmobile/service/AuthService.dart';
+import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
 
-import 'CustomTextField.dart';
-
-class Profil extends StatelessWidget {
+class Profil extends StatefulWidget {
   Profil({super.key});
+
+  @override
+  _ProfilState createState() => _ProfilState();
+}
+
+class _ProfilState extends State<Profil> {
   final AuthService _authService = AuthService();
+  final TextEditingController searchUser = TextEditingController();
+  late String searchValue;
+  late bool pass = true;
+  dynamic? utilisateur;
+  dynamic? stat;
+  final CrudServiceWithoutImage Service1 = CrudServiceWithoutImage();
+
+  @override
+  void initState() {
+    super.initState();
+    getStat();
+    updateUser();
+  }
+
+  Future<void> getStat() async {
+    String? token = await _authService.getToken();
+    if (token != null) {
+      final userId = await _authService.getUserIdFromToken(token);
+      final newStat = await Service1.getStat("stat", userId);
+      setState(() {
+        stat = newStat;
+        print(stat);
+      });
+      print("stat : $stat");
+    }
+  }
+
+  Future<void> updateUser() async {
+    String? token = await _authService.getToken();
+    if (token != null) {
+      final userId = await _authService.getUserIdFromToken(token);
+      final user = await Service1.findUser(userId);
+      setState(() {
+        utilisateur = user;
+      });
+      print("Utilisateur : $utilisateur");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    bool option = false;
-    final TextEditingController searchUser = TextEditingController();
-    late String searchValue;
-    late bool pass = true;
     return Scaffold(
-      body: Container(
+      body:  utilisateur == null || stat == null
+          ? const Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+                strokeWidth: 4,
+                color: Color(0xFF45A100),
+              ),
+            )
+          : Container(
           padding: const EdgeInsets.fromLTRB(6, 31, 6, 18),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -80,11 +126,11 @@ class Profil extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              Row(
+                                              const Row(
                                                 children: [
-                                                  const Column(
+                                                  Column(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         "@Username",
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
@@ -95,26 +141,26 @@ class Profil extends StatelessWidget {
                                                             fontWeight: FontWeight.w900
                                                         ),
                                                       ),
-                                                      const Text(
+                                                      Text(
                                                         "Apprenant",
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                            fontSize: 14,
-                                                            color: Color(0xFFFFFFFF),
-                                                            fontFamily: "Lexend",
-                                                            fontWeight: FontWeight.w900
+                                                          fontSize: 14,
+                                                          color: Color(0xFFFFFFFF),
+                                                          fontFamily: "Lexend",
+                                                          fontWeight: FontWeight.w900
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  const SizedBox(width: 15),
+                                                  /*const SizedBox(width: 15),
                                                   Image.asset(
                                                     "Assets/Icons/support.png",
                                                     fit: BoxFit.fill,
                                                     width: 24,
                                                     height: 24,
-                                                  ),
+                                                  ),*/
                                                 ],
                                               )
                                             ],
@@ -192,7 +238,7 @@ class Profil extends StatelessWidget {
                                                                   Container(
                                                                     width: double.infinity,
                                                                     child: const Text(
-                                                                      "0",
+                                                                      "3",
                                                                       textAlign: TextAlign.left,
                                                                       style: TextStyle(
                                                                         color: Color(0xFF000000),
@@ -263,10 +309,10 @@ class Profil extends StatelessWidget {
                                                                 children: [
                                                                   Container(
                                                                     width: double.infinity,
-                                                                    child: const Text(
-                                                                      "0",
+                                                                    child: Text(
+                                                                        stat["point"].toString(),
                                                                       textAlign: TextAlign.left,
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                         color: Color(0xFF000000),
                                                                         fontFamily: "Lexend",
                                                                         fontSize: 16,
@@ -340,7 +386,7 @@ class Profil extends StatelessWidget {
                                                                   Container(
                                                                     width: double.infinity,
                                                                     child: const Text(
-                                                                      "0",
+                                                                      "Débutant",
                                                                       textAlign: TextAlign.left,
                                                                       style: TextStyle(
                                                                         color: Color(0xFF000000),
@@ -411,10 +457,10 @@ class Profil extends StatelessWidget {
                                                                 children: [
                                                                   Container(
                                                                     width: double.infinity,
-                                                                    child: const Text(
-                                                                      "0",
+                                                                    child: Text(
+                                                                      stat["piece"].toString(),
                                                                       textAlign: TextAlign.left,
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                         color: Color(0xFF000000),
                                                                         fontFamily: "Lexend",
                                                                         fontSize: 16,
@@ -476,11 +522,11 @@ class Profil extends StatelessWidget {
                                         children: [
                                           Container(
                                             width: width * 0.445,
-                                            child: const Column(
+                                            child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   "Nom",
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -491,10 +537,10 @@ class Profil extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Ouattara",
+                                                  utilisateur["nom"],
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontFamily: "Lexend",
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 14,
@@ -505,40 +551,11 @@ class Profil extends StatelessWidget {
                                           ),
                                           Container(
                                             width: width * 0.445,
-                                            child: const Column(
+                                            child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  "Prenom",
-                                                  overflow: TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  style: TextStyle(
-                                                    fontFamily: "Lexend",
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Cheick Hamed",
-                                                  overflow: TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  style: TextStyle(
-                                                    fontFamily: "Lexend",
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            width: width * 0.445,
-                                            child: const Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
+                                                const Text(
                                                   "Tel",
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -549,7 +566,7 @@ class Profil extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "72834301",
+                                                  utilisateur["telephone"] != null ? utilisateur["telephone"] : " - : -",
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                   style: TextStyle(
@@ -562,7 +579,7 @@ class Profil extends StatelessWidget {
                                             ),
                                           ),
                                           Container(
-                                            child: const Column(
+                                            child: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
@@ -577,7 +594,7 @@ class Profil extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "CheickHamedOuattara865@gmail.com",
+                                                  utilisateur["email"] != null ? utilisateur["email"] : " - : -",
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                   style: TextStyle(

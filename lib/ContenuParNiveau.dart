@@ -2,35 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
 import 'package:sigidakanwmobile/takeClass.dart';
 
-class Coursparniveau extends StatefulWidget {
+class Contenuparniveau extends StatefulWidget {
   final dynamic activeLanguage;
 
-  Coursparniveau({this.activeLanguage}); // Utilisez un constructeur avec un paramètre
+  Contenuparniveau({this.activeLanguage}); // Utilisez un constructeur avec un paramètre
 
   @override
-  _CourCoursparniveauState createState() => _CourCoursparniveauState();
+  _ContenuparniveauState createState() => _ContenuparniveauState();
 }
 
-class _CourCoursparniveauState extends State<Coursparniveau> {
+class _ContenuparniveauState extends State<Contenuparniveau> {
   List<dynamic> Cours = [];
   dynamic utilisateur;
-  List<dynamic> niveau = <dynamic>[]; // Type modifié en List<dynamic>?
+  dynamic langue; // Type modifié en List<dynamic>?
   final CrudServiceWithoutImage _serviceWithoutImage = CrudServiceWithoutImage();
 
   @override
   void initState() {
     super.initState();
     print(widget.activeLanguage); // Accès à activeLanguage via widget.activeLanguage
-    updateNiveau();
+    updateLangue();
   }
 
-  Future<void> updateNiveau() async {
-    final stream = _serviceWithoutImage.getdata("niveauEtudes");
+  Future<void> updateLangue() async {
+    final stream = _serviceWithoutImage.getdata("langue");
     stream.listen((data) {
       setState(() {
         // Transformez chaque élément en GenreUser
-        niveau = data;
-        print("niveau : ${niveau}");
+        langue = data;
+        print("langue : ${langue}");
       });
     });
   }
@@ -38,7 +38,7 @@ class _CourCoursparniveauState extends State<Coursparniveau> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: niveau == null || widget.activeLanguage == null
+      body: langue == null
           ? const Center(
             child: CircularProgressIndicator(
               backgroundColor: Colors.white,
@@ -54,49 +54,17 @@ class _CourCoursparniveauState extends State<Coursparniveau> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             double width = constraints.maxWidth;
-            double height = constraints.maxHeight;
-
             return SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 42,
-                          height: 42,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26, // Color of the shadow
-                                  blurRadius: 4.0, // Softness of the shadow
-                                  spreadRadius: 1.0, // How much the shadow spreads
-                                  offset: Offset(2.0, 2.0), // Position of the shadow (x, y)
-                                ),
-                              ]
-                          ),
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(
-                              Icons.chevron_left,
-                              color: Colors.grey,
-                              size: 40,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 10),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: niveau.map<Widget>((n) {
+                      children: langue.map<Widget>((l) {
                         return Column(
                           children: [
                             Container(
@@ -110,8 +78,8 @@ class _CourCoursparniveauState extends State<Coursparniveau> {
                               ),
                               child: Center(
                                 child: Text(
-                                  n["niveau"][0].toUpperCase() +
-                                      n["niveau"].substring(1).toLowerCase(),
+                                  l["nom"][0].toUpperCase() +
+                                      l["nom"].substring(1).toLowerCase(),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     color: Color(0xFFFFFFFF),
@@ -123,9 +91,9 @@ class _CourCoursparniveauState extends State<Coursparniveau> {
                               ),
                             ),
                             Column(
-                              children: n["coursList"]
+                              children: l["coursList"]
                                   .where((cours) =>
-                                    cours["typeCours"]?["type"] == "LINGUISTIQUE"
+                                    cours["typeCours"]?["type"] == "CULTUREL"
                                   )
                                   .toList()
                                 .map<Widget>((c) {

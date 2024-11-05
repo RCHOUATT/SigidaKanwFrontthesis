@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sigidakanwmobile/ChoixDesLangues.dart';
 import 'package:sigidakanwmobile/CoursParNiveau.dart';
+import 'package:sigidakanwmobile/Modal/Utilisateur.dart';
+import 'package:sigidakanwmobile/profil.dart';
 import 'package:sigidakanwmobile/service/AuthService.dart';
 import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
-import 'Modal/UserProvider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,13 +22,28 @@ class HomeState extends State<Home> {
   late String searchValue;
   dynamic? utilisateur;
   dynamic _selectedLangue;
+  dynamic? stat;
   final AuthService _authService = AuthService();
   final CrudServiceWithoutImage Service1 = CrudServiceWithoutImage();
 
   @override
   void initState() {
     super.initState();
+    getStat();
     updateUser();
+  }
+
+  Future<void> getStat() async {
+    String? token = await _authService.getToken();
+    if (token != null) {
+      final userId = await _authService.getUserIdFromToken(token);
+      final newStat = await Service1.getStat("stat", userId);
+      setState(() {
+        stat = newStat;
+        print(stat);
+      });
+      print("stat : $stat");
+    }
   }
 
   Future<void> updateUser() async {
@@ -42,7 +57,7 @@ class HomeState extends State<Home> {
           _selectedLangue = utilisateur["langues"][0];
         }
       });
-      print("Utilisateur : $utilisateur");
+      //print("Utilisateur1 : ${_selectedLangue["coursList"][0]["typeCours"]["type"]}");
     }
   }
 
@@ -96,7 +111,7 @@ class HomeState extends State<Home> {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            Navigator.pushNamed(context, "/profil");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Profil()));
                           },
                           child: Container(
                             width: 50,
@@ -164,15 +179,15 @@ class HomeState extends State<Home> {
                                   backgroundColor: const Color(0xFFFFFFFF),
                                   radius: 50,
                                   child: Image.asset(
-                                    "Assets/Icons/flame.png",
+                                    "Assets/Icons/bitcoin.png",
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 16),
-                              const Text(
-                                "0",
-                                style: TextStyle(
+                              Text(
+                                utilisateur["stats"]["piece"].toString(),
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFFF3705A)
@@ -402,7 +417,7 @@ class HomeState extends State<Home> {
                             ),
                             GestureDetector(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> Coursparniveau()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> Coursparniveau(activeLanguage: _selectedLangue,)));
                               },
                               child: const Text("Voir plus ...",
                                 style: TextStyle(

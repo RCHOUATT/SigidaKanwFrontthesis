@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sigidakanwmobile/AccueillPage.dart';
+import 'ContenuParNiveau.dart';
 import 'Realisation.dart';
 import 'profil.dart';
 import 'home.dart';
@@ -14,9 +15,9 @@ class ApprenantNav extends StatefulWidget {
 class _HomePageState extends State<ApprenantNav> {
   int _selectedIndfinal = 0;
 
-  List<Widget> _page = [
+  final List<Widget> _page = [
     Home(),
-    Realisation(),
+    Contenuparniveau(),
     Profil(),
   ];
 

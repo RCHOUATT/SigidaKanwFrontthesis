@@ -29,7 +29,6 @@ class Level extends StatelessWidget {
         color: const Color(0xFFE3EDFD),
         child: LayoutBuilder(
           builder: (context, constraints){
-            double width = constraints.maxWidth;
             double heigth = constraints.maxHeight;
             return
               SingleChildScrollView(
