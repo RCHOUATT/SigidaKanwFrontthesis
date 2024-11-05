@@ -90,7 +90,7 @@
               }
             </div>
           </div>
-          <!-- Sous-options du menu déroulant -->
+          <!-- Sous-optionsl du menu déroulant -->
           @if (isDropdownOpen){
             <div class="dropdown-options">
               <div class="langue menu">
@@ -213,7 +213,7 @@
                 (click)="setActiveLangue(language.nom)"
                 (click)="setActiveLangueName(language.nom.charAt(0).toUpperCase() + language.nom.slice(1).toLowerCase())"
                 (click)="setActiveNiveau(niveau[0].niveau.charAt(0).toUpperCase() + niveau[0].niveau.slice(1).toLowerCase())"
-                (click)="findCoursBylangue('LINGUISTIQUE', language.nom)"
+                (click)="findCoursBylangue('CULTUREL', language.nom)"
                 (click)="setActive('Cours ' + this.coursPerlanguage[0].id, this.coursPerlanguage[0].id)"
                 (click)="setActiveCoursNom('Cours ' + 1)"
                 (click)="setActiveLessonNom('chapitre ' + 1)"
