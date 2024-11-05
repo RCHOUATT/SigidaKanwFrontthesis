@@ -7,11 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sigidakanwmobile/ApprenantNav.dart';
-import 'package:sigidakanwmobile/home.dart';
 import 'package:sigidakanwmobile/service/AuthService.dart';
 import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
 
-import 'CoursParNiveau.dart';
 import 'Modal/UserProvider.dart';
 
 
@@ -363,6 +361,11 @@ class _Takeclass extends State<Takeclass> {
                                                         : (String? value) {
                                                       setState(() {
                                                         _selectedResponse = value; // Met à jour la réponse sélectionnée
+                                                        if(!_isNextClicked){
+                                                          _isNextClicked = true;
+                                                          print(_isNextClicked);
+                                                        }
+                                                        print("selectedReponse" + _selectedResponse!);
                                                       });
                                                     },
                                                   );
@@ -475,6 +478,8 @@ class _Takeclass extends State<Takeclass> {
                                     else if(testOk){
                                       setState(() {
                                         testOk = !testOk;
+                                        _isNextClicked = false;
+                                        _selectedResponse = null;
                                         indexTest++;
                                         progressIndex++;
                                         bonneReponse = false;
@@ -535,8 +540,6 @@ class _Takeclass extends State<Takeclass> {
           color: const Color(0xFFE3EDFD),
           child: LayoutBuilder(
             builder: (context, constraints){
-              double width = constraints.maxWidth;
-              double heigth = constraints.maxHeight;
               return
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
@@ -588,7 +591,8 @@ class _Takeclass extends State<Takeclass> {
                                     String? token = await _authService.getToken();
                                     if (token != null) {
                                       final userId = await _authService.getUserIdFromToken(token);
-                                      int? reponse = await Service1.modifierStatistiques(userId, nbrePointAlloue.toInt(), nbrePieceAlloue.toInt());
+                                      final user = await Service1.findUser(userId);
+                                      int? reponse = await Service1.modifierStatistiques(user?["stats"]?["id"], nbrePointAlloue.toInt(), nbrePieceAlloue.toInt());
                                       print(reponse);
                                       if (reponse! >= 200 && reponse! <= 205) {
                                         String? token = await _authService.getToken();

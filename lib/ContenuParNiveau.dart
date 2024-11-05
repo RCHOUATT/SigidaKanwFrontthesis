@@ -136,10 +136,10 @@ class _ContenuparniveauState extends State<Contenuparniveau> {
                                       ),
                                       const SizedBox(height: 10),
                                       Wrap(
-                                        spacing: 10,
-                                        runSpacing: 10,
+                                        spacing: constraints.maxWidth * 0.03,
+                                        runSpacing: constraints.maxHeight * 0.03,
                                         children: c["chapitreList"].map<Widget>((ch) {
-                                          return SizedBox(
+                                          /*return SizedBox(
                                             width: (width * 0.5) - 6,
                                             height: 52,
                                             child: ElevatedButton(
@@ -170,6 +170,81 @@ class _ContenuparniveauState extends State<Contenuparniveau> {
                                                   fontFamily: "Lexend",
                                                 ),
                                               ),
+                                            ),
+                                          );*/
+                                          return GestureDetector(
+                                            onTap: () async {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => Takeclass(ch),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                                width: constraints.maxWidth * 0.3,
+                                                margin: const EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xFF85DA47),
+                                                  borderRadius: BorderRadius.circular(10),
+                                                ),
+                                                child: LayoutBuilder(
+                                                  builder: (BuildContext context, BoxConstraints constraints) {
+                                                    return Column(
+                                                      children: [
+                                                        Container(
+                                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(10),
+                                                          ),
+                                                          child: Image.network(
+                                                            ch["contenuList"][0]["files"][0]["url"],
+                                                            loadingBuilder: (context, child, loadingProgress) {
+                                                              const SizedBox(
+                                                                width: double.infinity,
+                                                                height: 100 * 0.768,
+                                                                child: Center(
+                                                                  child: CircularProgressIndicator(),
+                                                                ),
+                                                              );
+                                                              if (loadingProgress != null) {
+                                                                // Affiche le circular indicator pendant le chargement
+                                                                return const SizedBox(
+                                                                  width: double.infinity,
+                                                                  height: 100 * 0.768,
+                                                                  child: Center(
+                                                                    child: CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }else{return child;}
+                                                            },
+                                                            errorBuilder: (context, error, stackTrace) {
+                                                              return const Icon(Icons.broken_image, size: 50, color: Colors.grey);
+                                                            },
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 10),
+                                                        Container(
+                                                          width: double.infinity,
+                                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                          child: Text(
+                                                            ch["titre"][0].toUpperCase() +
+                                                                ch["titre"].substring(1).toLowerCase(),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            maxLines: 1,
+                                                            style: const TextStyle(
+                                                              color: Color(
+                                                                  0xFFFFFFFF),
+                                                              fontSize: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 10),
+                                                      ],
+                                                    );
+                                                  },
+                                                )
                                             ),
                                           );
                                         }).toList(),

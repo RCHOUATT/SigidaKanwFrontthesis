@@ -67,6 +67,15 @@ class CrudServiceWithoutImage {
     }
   }
 
+  Stream<List<dynamic>> getCours(String endpoint,) async* {
+    final response = await http.get(Uri.parse('$apiUrl1/$endpoint/Afficher'));
+    if (response.statusCode == 200) {
+      yield jsonDecode(response.body);
+    } else {
+      throw Exception('Element non trouvé');
+    }
+  }
+
   Stream<List<dynamic>> getNiveau(String endpoint,) async* {
     final response = await http.get(Uri.parse('$apiUrl1/$endpoint/Afficher'));
     if (response.statusCode == 200) {

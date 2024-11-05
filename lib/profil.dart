@@ -57,7 +57,7 @@ class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  utilisateur == null || stat == null
+      body:  utilisateur == null
           ? const Center(
               child: CircularProgressIndicator(
                 backgroundColor: Colors.white,
@@ -120,21 +120,21 @@ class _ProfilState extends State<Profil> {
                                               CircleAvatar(
                                                 radius: 50,
                                                 child: ClipOval(
-                                                  child: Image.asset(
-                                                    "Assets/Images/profil.png",
+                                                  child: Image.network(
+                                                    utilisateur["files"]["url"],
                                                     fit: BoxFit.fill,
                                                   ),
                                                 ),
                                               ),
-                                              const Row(
+                                              Row(
                                                 children: [
                                                   Column(
                                                     children: [
                                                       Text(
-                                                        "@Username",
+                                                        utilisateur["nom"],
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 16,
                                                             color: Color(0xFFFFFFFF),
                                                             fontFamily: "Lexend",
@@ -142,10 +142,10 @@ class _ProfilState extends State<Profil> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        "Apprenant",
+                                                        utilisateur["role"]["role"][0].toUpperCase() + utilisateur["role"]["role"].substring(1).toLowerCase(),
                                                         maxLines: 1,
                                                         overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                           fontSize: 14,
                                                           color: Color(0xFFFFFFFF),
                                                           fontFamily: "Lexend",
@@ -310,7 +310,7 @@ class _ProfilState extends State<Profil> {
                                                                   Container(
                                                                     width: double.infinity,
                                                                     child: Text(
-                                                                        stat["point"].toString(),
+                                                                      utilisateur["stats"]["point"].toString(),
                                                                       textAlign: TextAlign.left,
                                                                       style: const TextStyle(
                                                                         color: Color(0xFF000000),
@@ -458,7 +458,7 @@ class _ProfilState extends State<Profil> {
                                                                   Container(
                                                                     width: double.infinity,
                                                                     child: Text(
-                                                                      stat["piece"].toString(),
+                                                                      utilisateur["stats"]["piece"].toString(),
                                                                       textAlign: TextAlign.left,
                                                                       style: const TextStyle(
                                                                         color: Color(0xFF000000),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sigidakanwmobile/ChoixDesLangues.dart';
+import 'package:sigidakanwmobile/ContenuParNiveau.dart';
 import 'package:sigidakanwmobile/CoursParNiveau.dart';
 import 'package:sigidakanwmobile/Modal/Utilisateur.dart';
 import 'package:sigidakanwmobile/profil.dart';
 import 'package:sigidakanwmobile/service/AuthService.dart';
 import 'package:sigidakanwmobile/service/CrudServiceWithoutImage.dart';
+import 'package:sigidakanwmobile/takeClass.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -117,14 +119,13 @@ class HomeState extends State<Home> {
                             width: 50,
                             height: 50,
                             child: CircleAvatar(
-                                radius: 50,
-                                //backgroundColor: Color(0xFFFFFFFF),
-                                child:  ClipOval(
-                                  child: Image.asset(
-                                    "Assets/Images/profil.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
+                              radius: 50,
+                              child: ClipOval(
+                                child: Image.network(
+                                  utilisateur["files"]["url"],
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -343,46 +344,51 @@ class HomeState extends State<Home> {
                 ),
               ),
               const SizedBox(height: 10),
-              Container(
-                width: double.infinity,
-                height: 140,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFFFFFF),
-                  image: const DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                      "Assets/Images/band.png",
+              GestureDetector(
+                onTap: (){
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Contenuparniveau()));
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 140,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFFFFF),
+                    image: const DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(
+                        "Assets/Images/band.png",
+                      ),
                     ),
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      style: BorderStyle.solid,
-                      color: const Color(0xFF5E5E5E)
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color(0x3F6B6B6B),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        style: BorderStyle.solid,
+                        color: const Color(0xFF5E5E5E)
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color(0x3F6B6B6B),
+                          blurStyle: BlurStyle.normal,
+                          blurRadius: 4,
+                          spreadRadius: 0,
+                          offset: Offset(0, -4)
+                      ),
+                      BoxShadow(
+                        color: Color(0xFF6B6B6B),
                         blurStyle: BlurStyle.normal,
                         blurRadius: 4,
                         spreadRadius: 0,
-                        offset: Offset(0, -4)
-                    ),
-                    BoxShadow(
-                      color: Color(0xFF6B6B6B),
-                      blurStyle: BlurStyle.normal,
-                      blurRadius: 4,
-                      spreadRadius: 0,
-                    )
-                  ]
-                ),
-                padding: const EdgeInsets.all(10),
-                child: const Center(
-                  child: Text("Découvrez nos trésors culturels locaux !",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
+                      )
+                    ]
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: const Center(
+                    child: Text("Plongez dans nos cultures, une expérience unique à chaque pas.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),
@@ -436,74 +442,88 @@ class HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: _selectedLangue["coursList"]
-                              .where((cours) => cours["typeCours"]["type"] == "LINGUISTIQUE") // Filtre les cours de type LINGUISTIQUE
-                              .toList() // Convertit le résultat en liste
-                              .sublist(0)
-                              .map<Widget>((c){
-                                return Container(
-                                width: 120,
-                                margin: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: const Color(0xFF85DA47),
-                                    borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: LayoutBuilder(
-                                  builder: (BuildContext context, BoxConstraints constraints) {
-                                    return Column(
-                                      children: [
-                                        Container(
-                                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Image.network(
-                                            c["chapitreList"][0]["contenuList"][0]["files"][0]["url"],
-                                            loadingBuilder: (context, child, loadingProgress) {
-                                              const SizedBox(
-                                                width: double.infinity,
-                                                height: 120 * 0.768,
-                                                child: Center(
-                                                  child: CircularProgressIndicator(),
-                                                ),
-                                              );
-                                              if (loadingProgress != null) {
-                                                // Affiche le circular indicator pendant le chargement
-                                                return const SizedBox(
-                                                  width: double.infinity,
-                                                  height: 120 * 0.768,
-                                                  child: Center(
-                                                    child: CircularProgressIndicator(),
-                                                  ),
-                                                );
-                                              }else{return child;}
-                                            },
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return const Icon(Icons.broken_image, size: 50, color: Colors.grey);
-                                            },
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          width: double.infinity,
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                                          child: Text(c["titre"],
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                              color: Color(0xFF000000),
-                                              fontSize: 12
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                      ],
+                            children: (_selectedLangue["coursList"]
+                                .where((cours) => cours["typeCours"]["type"] == "LINGUISTIQUE").toList())
+                                .isNotEmpty
+                                ? (_selectedLangue["coursList"]
+                                .where((cours) => cours["typeCours"]["type"] == "LINGUISTIQUE").first["chapitreList"] as List)// Convertit le résultat en liste
+                                .sublist(0,(_selectedLangue["coursList"]
+                                .where((cours) => cours["typeCours"]["type"] == "LINGUISTIQUE").first["chapitreList"] as List).length <= 3 ? (_selectedLangue["coursList"]
+                                .where((cours) => cours["typeCours"]["type"] == "LINGUISTIQUE").first["chapitreList"] as List).length : 3)
+                                .map<Widget>((c){
+                                return GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Takeclass(c),
+                                      ),
                                     );
                                   },
-                                )
-                              );
-                            }).toList(),
+                                  child :Container(
+                                        width: 120,
+                                        margin: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF85DA47),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: LayoutBuilder(
+                                          builder: (BuildContext context, BoxConstraints constraints) {
+                                            return Column(
+                                              children: [
+                                                Container(
+                                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                  ),
+                                                  child: Image.network(
+                                                    c["contenuList"][0]["files"][0]["url"],
+                                                    loadingBuilder: (context, child, loadingProgress) {
+                                                      const SizedBox(
+                                                        width: double.infinity,
+                                                        height: 120 * 0.768,
+                                                        child: Center(
+                                                          child: CircularProgressIndicator(),
+                                                        ),
+                                                      );
+                                                      if (loadingProgress != null) {
+                                                        // Affiche le circular indicator pendant le chargement
+                                                        return const SizedBox(
+                                                          width: double.infinity,
+                                                          height: 120 * 0.768,
+                                                          child: Center(
+                                                            child: CircularProgressIndicator(),
+                                                          ),
+                                                        );
+                                                      }else{return child;}
+                                                    },
+                                                    errorBuilder: (context, error, stackTrace) {
+                                                      return const Icon(Icons.broken_image, size: 50, color: Colors.grey);
+                                                    },
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 10),
+                                                Container(
+                                                  width: double.infinity,
+                                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                  child: Text(c["titre"],
+                                                    overflow: TextOverflow.ellipsis,
+                                                    maxLines: 1,
+                                                    style: const TextStyle(
+                                                        color: Color(0xFFFFFFFF),
+                                                        fontSize: 12
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 10),
+                                              ],
+                                            );
+                                          },
+                                        )
+                                    )
+                                );
+                            }).toList(): [],
                           ),
                         ),
                       )
