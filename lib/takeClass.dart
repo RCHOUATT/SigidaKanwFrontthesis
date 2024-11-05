@@ -400,7 +400,7 @@ class _Takeclass extends State<Takeclass> {
                                     children: [
                                       const Text("Oups.. Ce n'est pas correcte.'", style: TextStyle(color: Color(0xEFFF023B)),),
                                       const SizedBox(height: 10,),
-                                      const Text("Reponse: jhbfzehjfbzekjdnekjd'", style: TextStyle(color: Color(0xFFFFF023B)),),
+                                      Text("Reponse: ${_activechapitre["testList"][0]["questionList"][indexTest]["reponseCorrecte"]}", style: TextStyle(color: Color(0xFFFFF023B)),),
                                     ],
                                   )
                               ],
@@ -467,6 +467,7 @@ class _Takeclass extends State<Takeclass> {
                                     if(!testOk){
                                       setState(() {
                                         testOk = !testOk;
+                                        _isNextClicked = true;
                                         if(_selectedResponse == _activechapitre["testList"][0]["questionList"][indexTest]["reponseCorrecte"]){
                                           bonneReponse = true;
                                           nbrePointAlloue = (_activechapitre["testList"][0]["nbrePoint"] / _activechapitre["testList"][0]["questionList"].length) + nbrePointAlloue;
